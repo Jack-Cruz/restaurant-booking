@@ -30,7 +30,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<RestaurantDto> getRestaurants() throws BookingException {
         List<Restaurant> restaurantsEntity = restaurantRepository.findAll();
-        return restaurantsEntity.stream().map(restaurant -> modelMapper.map(restaurant, RestaurantDto.class))
+        return restaurantsEntity.stream().
+                map(restaurant -> modelMapper.map(restaurant, RestaurantDto.class))
                 .collect(Collectors.toList());
     }
 
@@ -47,11 +48,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         }catch (Exception ex){
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
-        return modelMapper.map(getRestaurantEntity((restaurant.getId())), RestaurantDto.class);
+        return modelMapper.map(getRestaurantEntity(restaurant.getId()), RestaurantDto.class);
     }
 
-    private Restaurant getRestaurantEntity(Long restaurantIg) throws BookingException{
-        return restaurantRepository.findById(restaurantIg)
+    private Restaurant getRestaurantEntity(Long restaurantId) throws BookingException{
+        return restaurantRepository.findById(restaurantId)
                 .orElseThrow(()-> new NotFoundException("NOTFOUND-404", "RESTAURANT-NOT FOUND-404"));
     }
 }

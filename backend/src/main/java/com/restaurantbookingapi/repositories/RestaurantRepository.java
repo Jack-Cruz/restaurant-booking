@@ -20,9 +20,9 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     //@Query("SELECT rest FROM Restaurant rest WHERE rest.id=?1")
 
-    //Optional<Restaurant> findById(Long id);
+    Optional<Restaurant> findById(Long id);
 
-    //Optional<Restaurant> findByName(String name);
+    Optional<Restaurant> findByName(String name);
 
     @Query("SELECT Rest FROM Restaurant  Rest")
     List<Restaurant> findByRestaurants();
